@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,4 +34,15 @@ body {
   overflow: hidden;
   border: 1px solid #e0e0e0;
   border-radius: 20px;
+}
+.custom-title{
+  font-size: 21px;
+  letter-spacing: -0.1em;
+  font-weight: 700;
+  color: black;
+}
+.custom-p-tag{
+  letter-spacing: -0.1em;
+  font-weight: 900;
+  color: #d9d9d9;
 }
