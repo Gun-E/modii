@@ -28,8 +28,8 @@ body {
   }
 }
 .iphone-container {
-  width: 375px;
-  height: 812px;
+  width: 393px;
+  height: 852px;
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid #e0e0e0;
@@ -46,12 +46,17 @@ body {
   font-weight: 900;
   color: #d9d9d9;
 }
+.custom-last-p-tag{
+  letter-spacing: -0.1em;
+  font-weight: 900;
+  color: #d5d6f2;
+}
 .modii-body{
   background-color: white;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   width: 100%;
-  height: 52%;
+  height: 48%;
   position: absolute;
   bottom: 0;
 }
@@ -77,6 +82,99 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.modii-device-text{
+  font-weight: 900;
+  letter-spacing: -0.1em;
+  position: absolute;
+  top: 11px;
+  inset-inline-start: 15px;
+}
+.modii-device-image{
+  position: absolute;
+  z-index: 100;
+}
+.modii-device-status{
+  padding-left: 35px;
+  display: inline-flex;
+  gap: 10px;
+}
+.modii-device-status-child{
+  position: relative;
+  width: 140px;
+  height: 106px;
+  color: black;
+}
+.image-circle{
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  right: 10px;
+  bottom: 10px;
+}
+.modii-create{
+  position: relative;
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+}
+.modii-create-header{
+  font-weight: 900;
+  letter-spacing: -0.1em;
+  color: black;
+  background-color: white;
+  width: 100%;
+  height: 17%;
+  top: 0;
+  padding-top: 76px;
+}
+.favorites-body{
+  padding-top: 10px;
+  padding-left: 28px;
+  padding-bottom: 10px;
+  display: inline-flex;
+  gap: 15px;
+}
+.circle-favorites{
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: #f8afc6;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.favorites-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.favorites-p-tag{
+  letter-spacing: -0.1em;
+  font-size: 13px;
+  font-weight: 400;
+  color: white;
+}
+.favorites-create{
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: #55555a;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.favorites-create-p-tag{
+  letter-spacing: -0.1em;
+  font-size: 13px;
+  font-weight: 400;
+  color: #d5d6f2;
 }

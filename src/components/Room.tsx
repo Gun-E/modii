@@ -1,7 +1,8 @@
+// Room.tsx
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { DeviceStatusDTO } from "@/types/DeviceStatusDTO";
+import { useDevice } from '@/context/DeviceContext';
 
 const overlayImageMap: { [key: string]: { on: string, off: string } } = {
     refrigerator: {
@@ -23,25 +24,18 @@ const overlayImageMap: { [key: string]: { on: string, off: string } } = {
 };
 
 export default function Room() {
+    const { devices } = useDevice();
     const [overlayImages, setOverlayImages] = useState<string[]>([]);
 
     useEffect(() => {
-        fetch('http://192.168.219.68:8080/device/1/status')
-            .then((response) => response.json())
-            .then((data: DeviceStatusDTO[]) => {
-                console.log('Fetched API Data:', data);
-                const images = data
-                    .map((item: DeviceStatusDTO) => {
-                        const imageMap = overlayImageMap[item.deviceType];
-                        return imageMap ? imageMap[item.status === 1 ? 'on' : 'off'] : null;
-                    })
-                    .filter((image): image is string => image !== null);
-                setOverlayImages(images);
+        const images = devices
+            .map((device) => {
+                const imageMap = overlayImageMap[device.deviceType];
+                return imageMap ? imageMap[device.status === 1 ? 'on' : 'off'] : null;
             })
-            .catch((error) => {
-                console.error('Error fetching API data:', error);
-            });
-    }, []);
+            .filter((image): image is string => image !== null);
+        setOverlayImages(images);
+    }, [devices]);
 
     return (
         <div className="modii-room">
@@ -62,8 +56,8 @@ export default function Room() {
                     height={344}
                     className="absolute"
                     style={{
-                        paddingLeft: 40,
-                        paddingRight: 40,
+                        paddingLeft: 50,
+                        paddingRight: 50,
                         objectFit: 'cover',
                         zIndex: 100 + index,
                     }}
