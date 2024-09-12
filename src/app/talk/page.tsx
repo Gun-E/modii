@@ -6,12 +6,13 @@ import Header from "@/components/Header";
 import StatusBar from "@/components/StatusBar";
 import Favorites from "@/components/Favorites";
 import ChatList from "@/components/ChatList";
+import StatusBarWhite from "@/components/StatusBarWhite";
 
 export default function Home() {
 
     return (
         <div className="modii modii-dark">
-            <StatusBar/>
+            <StatusBarWhite/>
             <Header/>
             <Favorites/>
             <div className="modii-talk-body">

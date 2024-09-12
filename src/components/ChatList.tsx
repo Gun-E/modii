@@ -45,13 +45,12 @@ export default function ChatList() {
     };
 
 
-
     return (
         <div className="chat-list">
             {chatList.map((data) => (
                 <Link href={`/talk/${data.deviceId}`} key={data.deviceId} className="chat-body">
                     <div className="chat-content">
-                        <div className="circle-chat" style={{ backgroundColor: data.image }}>
+                        <div className="circle-chat" style={{backgroundColor: data.image}}>
                             <Image
                                 src={`/images/${data.deviceType}.png`}
                                 alt={data.name}
