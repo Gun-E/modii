@@ -1,39 +1,41 @@
+// components/Footer.tsx
 "use client";
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+    const pathname = usePathname();
     const [homeImage, setHomeImage] = useState('/images/home=Icon_80px_home_on.png');
+    const [chatImage, setChatImage] = useState('/images/chat_icon_off.png');
+    const [profileImage, setProfileImage] = useState('/images/my_icon_off.png');
 
-    const handleHomeMouseDown = () => {
-        setHomeImage('/images/home=Icon_80px_home_off.png');
-    };
+    useEffect(() => {
+        setHomeImage(pathname === '/' ? '/images/home=Icon_80px_home_on.png' : '/images/home=Icon_80px_home_off.png');
 
-    const handleHomeMouseUp = () => {
-        setHomeImage('/images/home=Icon_80px_home_on.png');
-    };
+        setChatImage(pathname === '/talk' ? '/images/chat_icon_on.png' : '/images/chat_icon_off.png');
+
+        setProfileImage(pathname === '/profile' ? '/images/my_icon_on.png' : '/images/my_icon_off.png');
+    }, [pathname]);
 
     return (
-        <div className="absolute flex items-center justify-between bottom-0 w-full p-11">
+        <div className="absolute flex items-center justify-between bottom-0 w-full custom-footer-padding">
             <div className="flex flex-col items-center justify-center mt-5">
-                <Link href="/talk" className="flex flex-col items-center space-y-1 custom-button">
+                <Link href="/talk" className="flex flex-col items-center space-y-1">
                     <Image
-                        src="/images/icon_30px_chat.png"
+                        src={chatImage}
                         alt="chat icon"
                         style={{ objectFit: 'cover' }}
-                        width={30}
-                        height={30}
+                        width={37}
+                        height={54}
                     />
-                    <p className="custom-p-tag mt-1.5">모디톡</p>
                 </Link>
             </div>
 
             <Link
                 href="/"
                 className="flex items-center justify-center"
-                onMouseDown={handleHomeMouseDown}
-                onMouseUp={handleHomeMouseUp}
             >
                 <Image
                     src={homeImage}
@@ -45,15 +47,14 @@ export default function Footer() {
             </Link>
 
             <div className="flex flex-col items-center justify-center mt-5">
-                <Link href="/profile" className="flex flex-col items-center space-y-1 custom-button">
+                <Link href="/profile" className="flex flex-col items-center space-y-1">
                     <Image
-                        src="/images/icon_30px_my.png"
+                        src={profileImage}
                         alt="profile icon"
                         style={{ objectFit: 'cover' }}
-                        width={30}
-                        height={30}
+                        width={37}
+                        height={54}
                     />
-                    <p className="custom-p-tag mt-1.5">프로필</p>
                 </Link>
             </div>
         </div>

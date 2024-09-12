@@ -6,10 +6,11 @@ export default function StatusBar() {
         <Image
             src="/images/Status bar.png"
             alt="Status bar"
-            className="absolute"
-            style={{objectFit: 'cover'}}
+            className="absolute w-auto"
             width={393}
-            height={54}
+            height={54.1}
+            style={{objectFit: 'cover'}}
+            priority
         />
     );
 }

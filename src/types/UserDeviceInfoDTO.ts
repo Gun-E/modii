@@ -3,4 +3,5 @@ export interface UserDeviceInfoDTO {
     name: string;
     deviceType: string;
     status: number;
+    image: string;
 }

@@ -14,7 +14,7 @@ export const DeviceProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const [devices, setDevices] = useState<UserDeviceInfoDTO[]>([]);
 
     useEffect(() => {
-        fetch('http://192.168.219.68:8080/device/1')
+        fetch('http://192.168.219.107:8080/device/1')
             .then((response) => response.json())
             .then((data: UserDeviceInfoDTO[]) => {
                 console.log('Fetched API Data:', data);
@@ -29,7 +29,7 @@ export const DeviceProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         const newStatus = currentStatus === 0 ? 1 : 0;
 
         try {
-            await fetch(`http://192.168.219.68:8080/device/${deviceId}`, {
+            await fetch(`http://192.168.219.107:8080/device/${deviceId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

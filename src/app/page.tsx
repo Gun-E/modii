@@ -7,6 +7,7 @@ import Room from "@/components/Room";
 import DeviceSwitchs from "@/components/DeviceSwitchs";
 import {DeviceProvider} from '@/context/DeviceContext';
 import StatusBar from "@/components/StatusBar";
+import ProgressBar from "@/components/ProgressBar";
 
 export default function Home() {
 
@@ -17,7 +18,7 @@ export default function Home() {
                 <Header/>
                 <Room/>
                 <div className="modii-body">
-                    <div className="p-9 flex items-center justify-between">
+                    <div className="modii-content flex items-center justify-between">
                         <p className="custom-title">우리집 모디</p>
                         <div className="flex items-center space-x-2 mt-1">
                             <Link href="/create" className="flex items-center space-x-2 custom-button">
@@ -33,6 +34,7 @@ export default function Home() {
                         </div>
                     </div>
                     <DeviceSwitchs/>
+                    <ProgressBar/>
                 </div>
                 <Footer/>
             </div>

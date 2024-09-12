@@ -7,15 +7,14 @@ interface FavoriteDevice {
     deviceId: bigint;
     name: string;
     deviceType: string;
+    image: string;
 }
-
-const colors = ['#f8afc6', '#FFF7B8FF', '#D6FCD8FF', '#D5D6F2FF'];
 
 export default function Favorites() {
     const [favorites, setFavorites] = useState<FavoriteDevice[]>([]);
 
     useEffect(() => {
-        fetch('http://192.168.219.68:8080/device/1/favorites')
+        fetch('http://192.168.219.107:8080/device/1/favorites')
             .then((response) => response.json())
             .then((data: FavoriteDevice[]) => {
                 setFavorites(data);
@@ -40,11 +39,11 @@ export default function Favorites() {
                 <p className="favorites-create-p-tag">단짝 모디</p>
             </Link>
 
-            {favorites.map((favorite, index) => (
+            {favorites.map((favorite) => (
                 <Link href={`/device/${favorite.deviceId}`} key={favorite.deviceId}>
                     <div className="favorites-container">
                         <div className="circle-favorites"
-                             style={{backgroundColor: colors[index % colors.length]}}>
+                             style={{backgroundColor: favorite.image}}>
                             <Image
                                 src={`/images/${favorite.deviceType}.png`}
                                 alt={favorite.deviceType}

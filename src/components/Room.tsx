@@ -1,8 +1,8 @@
 // Room.tsx
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { useDevice } from '@/context/DeviceContext';
+import React, {useEffect, useState} from "react";
+import {useDevice} from '@/context/DeviceContext';
 
 const overlayImageMap: { [key: string]: { on: string, off: string } } = {
     refrigerator: {
@@ -24,7 +24,7 @@ const overlayImageMap: { [key: string]: { on: string, off: string } } = {
 };
 
 export default function Room() {
-    const { devices } = useDevice();
+    const {devices} = useDevice();
     const [overlayImages, setOverlayImages] = useState<string[]>([]);
 
     useEffect(() => {
@@ -42,7 +42,12 @@ export default function Room() {
             <Image
                 src="/images/room.png"
                 alt="room image"
-                style={{ objectFit: 'cover' }}
+                className="absolute"
+                style={{
+                    objectFit: 'cover',
+                    paddingLeft: 50,
+                    paddingRight: 50
+                }}
                 width={384}
                 height={344}
             />
