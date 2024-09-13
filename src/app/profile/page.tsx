@@ -1,34 +1,42 @@
 import Image from 'next/image';
 import React from 'react';
-import Link from 'next/link';
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import HeaderWhite from "@/components/HeaderWhite";
+import StatusBar from "@/components/StatusBarWhite";
 
 export default function Home() {
 
     return (
-        <div className="modii modii-dark">
-            <Header />
-
-            <div className="modii-talk-body">
-                <div className="p-9 flex items-center justify-between">
-                    <p className="custom-title">모디톡</p>
-                    <div className="flex items-center space-x-2 mt-1">
-                        <Link href="/" className="flex items-center space-x-2 custom-button">
-                            <h3 className="custom-p-tag">최신순</h3>
-                            <Image
-                                src="/images/icon_20px_QR.png"
-                                alt="QR icon"
-                                layout="intrinsic"
-                                objectFit="cover"
-                                width={20}
-                                height={20}
-                            />
-                        </Link>
-                    </div>
-                </div>
+        <div className="modii modii-white">
+            <StatusBar/>
+            <div className="modii-profile-body">
+                <HeaderWhite/>
+                <Image
+                    src="/images/사용자 성격.png"
+                    alt="성격"
+                    style={{
+                        objectFit: 'cover',
+                        position: 'absolute',
+                        top: 178,
+                        left: 31
+                    }}
+                    width={333}
+                    height={78}
+                />
             </div>
-            <Footer />
+            <Image
+                src="/images/내 일정.png"
+                alt="일정"
+                style={{
+                    objectFit: 'cover',
+                    position: 'absolute',
+                    bottom: 268,
+                    left: 31
+                }}
+                width={333}
+                height={78}
+            />
+            <Footer/>
         </div>
     );
 }

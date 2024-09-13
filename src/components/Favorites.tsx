@@ -40,7 +40,7 @@ export default function Favorites() {
             </Link>
 
             {favorites.map((favorite) => (
-                <Link href={`/device/${favorite.deviceId}`} key={favorite.deviceId}>
+                <Link href={`/talk/${favorite.deviceId}`} key={favorite.deviceId}>
                     <div className="favorites-container">
                         <div className="circle-favorites"
                              style={{backgroundColor: favorite.image}}>

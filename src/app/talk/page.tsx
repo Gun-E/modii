@@ -3,10 +3,10 @@ import React from 'react';
 import Link from 'next/link';
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import StatusBar from "@/components/StatusBar";
 import Favorites from "@/components/Favorites";
 import ChatList from "@/components/ChatList";
 import StatusBarWhite from "@/components/StatusBarWhite";
+import ProgressBar from "@/components/ProgressBar";
 
 export default function Home() {
 
@@ -32,6 +32,7 @@ export default function Home() {
                     </div>
                 </div>
                 <ChatList/>
+                <ProgressBar/>
             </div>
             <Footer/>
         </div>

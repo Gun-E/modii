@@ -1,12 +1,14 @@
 "use client";
 
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import React, {useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import StatusBarWhite from "@/components/StatusBarWhite";
 import Link from "next/link";
+import { formatDate } from '@/utils/utils';
 
-// 채팅 메시지 타입
 type ChatMessage = {
+    name: string;
     senderType: string;
     chattedList: string;
     chattedTime: Date;
@@ -15,65 +17,65 @@ type ChatMessage = {
 };
 
 export default function Home() {
+    const pathname = usePathname();
+    const deviceId = pathname?.split("/")[2];
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendMessage();
+        }
+    };
     const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
-    const [message, setMessage] = useState<string>(""); // 입력한 메시지 상태
-    const userId = 1; // 유저 ID
-    const deviceId = 1; // 디바이스 ID
+    const [message, setMessage] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const userId = 1;
 
-    // 채팅 가져오기
-    useEffect(() => {
-        fetchChatMessages();
-    }, []);
+    const chatBodyRef = useRef<HTMLDivElement | null>(null);
+    const shouldScrollRef = useRef<boolean>(false);
 
-    const fetchChatMessages = async () => {
+    const fetchChatMessages = useCallback(async () => {
+        if (!deviceId) return;
+
+        setIsLoading(true);
         try {
             const response = await fetch(`http://192.168.219.107:8080/device/${userId}/chat/${deviceId}`);
             const data = await response.json();
             setChatMessages(data);
+            shouldScrollRef.current = true;
         } catch (error) {
             console.error("Error fetching chat messages:", error);
+        } finally {
+            setIsLoading(false);
         }
-    };
-    const formatDate = (dateString: string | Date) => {
-        const date = new Date(dateString);
-        const today = new Date();
+    }, [deviceId]);
 
-        const isToday =
-            date.getFullYear() === today.getFullYear() &&
-            date.getMonth() === today.getMonth() &&
-            date.getDate() === today.getDate();
+    useEffect(() => {
+        fetchChatMessages();
+    }, [fetchChatMessages]);
 
-        if (isToday) {
-            const timeString = date.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true
-            });
-            const [time, period] = timeString.split(' ');
-            return `${period} ${time}`;
-        } else {
-            const year = date.getFullYear().toString().slice(-2); // YY
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // MM
-            const day = String(date.getDate()).padStart(2, '0'); // DD
-            return `${year}.${month}.${day}`; // "24.09.10"
+    useEffect(() => {
+        if (!isLoading && shouldScrollRef.current && chatBodyRef.current) {
+            chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+            shouldScrollRef.current = false;
         }
-    };
-    // 채팅 보내기
+    }, [isLoading, chatMessages]);
+
     const sendMessage = async () => {
-        if (!message.trim()) return;
+        if (!message.trim() || !deviceId) return;
 
         try {
-            const response = await fetch(`http://192.168.219.107:8080/device/${userId}/chat/${deviceId}/input`, {
+            const response = await fetch(`http://192.168.219.107:8080/chat/${userId}/${deviceId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({message}), // 전송할 메시지
+                body: JSON.stringify({ message, deviceId }),
             });
 
             if (!response.ok) throw new Error('Failed to send message');
-            setMessage(""); // 메시지 전송 후 입력창 초기화
-            fetchChatMessages(); // 채팅 목록 갱신
+            setMessage("");
+            shouldScrollRef.current = true;
+            await fetchChatMessages();
         } catch (error) {
             console.error("Error sending message:", error);
         }
@@ -81,64 +83,60 @@ export default function Home() {
 
     return (
         <div className="modii-chat-detail">
-            <StatusBarWhite/>
+            <StatusBarWhite />
             <div className="modii-chat-detail-header flex justify-center">
                 <Link href="/talk">
                     <Image
                         src="/images/icon_24px_arrow_back_white.png"
                         alt="arrow"
-                        style={{
-                            objectFit: 'cover',
-                            position: 'absolute',
-                            left: 20,
-                            top: 81
-                        }}
+                        style={{ objectFit: 'cover', position: 'absolute', left: 20, top: 81 }}
                         width={24}
                         height={24}
                     />
                 </Link>
-                곽춘배
+                <h1>{chatMessages.length > 0 ? chatMessages[0].name : 'Chat'}</h1>
             </div>
-            
-            {chatMessages.map((chat, index) => (
-                <div key={index} className={`modii-chat-detail-body`}>
-                    {chat.senderType === "device" && (
-                        <div className="chat-detail-content">
-                            <div className="chat-circle-chat" style={{backgroundColor: chat.image}}>
-                                <Image
-                                    src={`/images/${chat.deviceType}.png`}
-                                    alt={chat.deviceType}
-                                    style={{
-                                        objectFit: 'cover',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}
-                                    width={60}
-                                    height={60}
-                                />
-                            </div>
-                            <div className="chat-text">
-                                <div className="chat-detail-message-time">
-                                    <span className="device-chat-message">{chat.chattedList}</span>
-                                    <span className="chat-time">{formatDate(chat.chattedTime)}</span>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                    {chat.senderType === "user" && (
-                        <div className="chat-user-detail-content">
-                            <div className="chat-text">
-                                <div className="chat-user-message-time">
-                                    <span className="device-chat-message">{chat.chattedList}</span>
-                                    <span
-                                        className="chat-time">{formatDate(chat.chattedTime)}</span> {/* 포맷팅된 시간 */}
-                                </div>
-                            </div>
-                        </div>
-                    )}
 
-                </div>
-            ))}
+            <div className="modii-chat-detail-body" ref={chatBodyRef}>
+                {isLoading ? (
+                    <div className="flex justify-center items-center caret-blue-100">채팅방 로딩중</div>
+                ) : (
+                    chatMessages.map((chat, index) => (
+                        <div key={index} className={`chat-message ${chat.senderType}`}>
+                            {chat.senderType === "device" && (
+                                <div className="chat-detail-content">
+                                    <div className="chat-circle-chat" style={{ backgroundColor: chat.image }}>
+                                        <Image
+                                            src={`/images/${chat.deviceType}.png`}
+                                            alt={chat.deviceType}
+                                            style={{ objectFit: 'cover', justifyContent: 'center', alignItems: 'center' }}
+                                            width={60}
+                                            height={60}
+                                        />
+                                    </div>
+                                    <div className="chat-text">
+                                        <h2 className="modii-name">{chat.name}</h2>
+                                        <div className="chat-detail-message-time">
+                                            <span className="device-chat-message">{chat.chattedList}</span>
+                                            <span className="chat-time">{formatDate(chat.chattedTime)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {chat.senderType === "user" && (
+                                <div className="chat-user-detail-content">
+                                    <div className="chat-text">
+                                        <div className="chat-user-message-time">
+                                            <span className="device-chat-message">{chat.chattedList}</span>
+                                            <span className="chat-user-time">{formatDate(chat.chattedTime)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))
+                )}
+            </div>
 
             <div className="modii-chat-detail-footer">
                 <div className="input-wrapper">
@@ -148,6 +146,7 @@ export default function Home() {
                         placeholder="모디에게 말을 건내보세요!"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        onKeyDown={handleKeyDown}
                     />
                     <button className="input-send-button" onClick={sendMessage}>
                         <Image

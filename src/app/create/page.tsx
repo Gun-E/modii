@@ -34,7 +34,6 @@ export default function Home() {
                 width={390}
                 height={726}
             />
-
             <div className="flex items-center justify-center">
                 <Image
                     src="/images/info.png"

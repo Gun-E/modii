@@ -9,7 +9,11 @@ export default function StatusBar() {
             className="absolute w-auto"
             width={393}
             height={54.1}
-            style={{objectFit: 'cover'}}
+            style={{
+                objectFit: 'cover',
+                position: 'absolute',
+                zIndex: 1000
+            }}
             priority
         />
     );

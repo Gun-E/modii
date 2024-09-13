@@ -16,24 +16,28 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #333333;
+}
 .iphone-container {
   width: 393px;
   height: 852px;
-  margin: 0 auto;
+  margin: 50px;
   overflow: hidden;
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
+  border: 18px solid #ffffff;
+  box-sizing: content-box;
+  box-shadow: 0 4px 10px rgb(143, 147, 242, 1);
+  border-radius: 60px;
+  position: relative;
 }
 .custom-title{
   font-size: 21px;
@@ -72,11 +76,23 @@ body {
   position: absolute;
   bottom: 0;
 }
+.modii-profile-body{
+  background-color: #8e92f2;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  width: 100%;
+  height: 35%;
+  position: absolute;
+  top: 0;
+}
 .modii{
   position: relative;
   width: 100%;
   height: 100%;
   background-color: #F7F7FF;
+}
+.modii-white{
+  background-color: #ffffff;
 }
 .modii-dark{
   background-color: #353535;
@@ -132,12 +148,6 @@ body {
   width: 100%;
   height: 100%;
 }
-.modii-chat-detail{
-  position: relative;
-  background-color: #f7f7ff;
-  width: 100%;
-  height: 100%;
-}
 .modii-create-header{
   font-weight: 900;
   color: black;
@@ -147,15 +157,45 @@ body {
   top: 0;
   padding-top: 76px;
 }
+
+.modii-chat-detail{
+  position: relative;
+  background-color: #f7f7ff;
+  width: 100%;
+  height: 100%;
+}
 .modii-chat-detail-header{
   font-weight: 900;
   font-size: 20px;
   color: #ffffff;
   background-color: #353535;
   width: 100%;
-  height: 16%;
+  height: 15%;
   top: 0;
   padding-top: 76px;
+}
+.modii-chat-detail-body {
+  max-height: 600px;
+  overflow-y: auto;
+  /*scroll-behavior: smooth;*/
+}
+.modii-chat-detail-body::-webkit-scrollbar {
+  display: none;
+}
+.modii-chat-detail-body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.modii-chat-detail-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 115px;
+  border-radius: 20px 20px 0 0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .favorites-body{
   padding-top: 10px;
@@ -266,6 +306,7 @@ body {
 .chat-detail-message-time{
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
   padding: 9px 14px;
   width: 195px;
   background-color: #d5d6f2;
@@ -312,21 +353,11 @@ body {
 .chat-user-time {
   position: absolute;
   bottom: 0;
-  inset-inline-start: 166px;
+  inset-inline-start: 168px;
   font-size: 11px;
   color: #d9d9d9;
 }
-.modii-chat-detail-footer{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 115px;
-  border-radius: 20px 20px 0 0;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .chat-input{
   width: 333px;
   height: 40px;
@@ -355,4 +386,12 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+.user-name {
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 43px;
+  padding-left: 23px;
 }
