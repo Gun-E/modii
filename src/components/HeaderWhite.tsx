@@ -1,7 +1,10 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
+import {useAuth} from "@/app/context/AuthContext";
 
 export default function Header() {
+    const { logout } = useAuth();
     return (
         <div className="pt-12">
             <div className="p-7 flex items-center justify-between">
@@ -12,7 +15,7 @@ export default function Header() {
                     width={93}
                     height={24}
                 />
-                <Link href="/modify">
+                <button onClick={logout}>
                     <Image
                         src="/images/icon_24px_edit.png"
                         alt="settings icon"
@@ -20,7 +23,7 @@ export default function Header() {
                         width={24}
                         height={24}
                     />
-                </Link>
+                </button>
 
             </div>
         </div>

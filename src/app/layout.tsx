@@ -1,8 +1,7 @@
 import type {Metadata} from "next";
 import "./globals.css";
 import React from "react";
-import Image from "next/image";
-// import Iphone from '@/components/Iphone'
+import AuthLayout from "@/components/AuthLayout";
 
 export const metadata: Metadata = {
     title: "MODII",
@@ -17,10 +16,7 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body>
-        <div className="iphone-container">
-            {children}
-        </div>
-
+        <AuthLayout>{children}</AuthLayout>
         </body>
         </html>
     );

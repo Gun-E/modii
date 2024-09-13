@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Room from "@/components/Room";
-import DeviceSwitchs from "@/components/DeviceSwitchs";
+import DeviceSwitches from "@/components/DeviceSwitches";
 import {DeviceProvider} from '@/context/DeviceContext';
 import StatusBar from "@/components/StatusBar";
 import ProgressBar from "@/components/ProgressBar";
@@ -33,7 +33,7 @@ export default function Home() {
                             </Link>
                         </div>
                     </div>
-                    <DeviceSwitchs/>
+                    <DeviceSwitches/>
                     <ProgressBar/>
                 </div>
                 <Footer/>
