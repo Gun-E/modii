@@ -38,7 +38,7 @@ export default function Home() {
 
         setIsLoading(true);
         try {
-            const response = await fetch(`http://192.168.219.107:8080/device/${userId}/chat/${deviceId}`);
+            const response = await fetch(`https://aqueous-coast-82122-c626a44767e1.herokuapp.com/device/${userId}/chat/${deviceId}`);
             const data = await response.json();
             setChatMessages(data);
             shouldScrollRef.current = true;
@@ -64,7 +64,7 @@ export default function Home() {
         if (!message.trim() || !deviceId) return;
 
         try {
-            const response = await fetch(`http://192.168.219.107:8080/chat/${userId}/${deviceId}`, {
+            const response = await fetch(`https://aqueous-coast-82122-c626a44767e1.herokuapp.com/chat/${userId}/${deviceId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

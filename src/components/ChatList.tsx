@@ -10,7 +10,7 @@ export default function ChatList() {
     const [chatList, setChatList] = useState<ChatListDTO[]>([]);
 
     useEffect(() => {
-        fetch('http://192.168.219.107:8080/device/1/chat-list')
+        fetch('https://aqueous-coast-82122-c626a44767e1.herokuapp.com/device/1/chat-list')
             .then((response) => response.json())
             .then((data: ChatListDTO[]) => {
                 setChatList(data);

@@ -24,7 +24,7 @@ export default function Home() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://192.168.219.107:8080/login', { email, password }, {
+            const response = await axios.post('https://aqueous-coast-82122-c626a44767e1.herokuapp.com/login', { email, password }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
