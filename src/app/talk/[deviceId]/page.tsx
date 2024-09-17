@@ -79,6 +79,22 @@ export default function Home() {
         } catch (error) {
             console.error("Error sending message:", error);
         }
+        try {
+            const response = await fetch(`https://aqueous-coast-82122-c626a44767e1.herokuapp.com/chat/gpt/${userId}/${deviceId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message, deviceId }),
+            });
+
+            if (!response.ok) throw new Error('Failed to send message');
+            setMessage("");
+            shouldScrollRef.current = true;
+            await fetchChatMessages();
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
     };
 
     return (
