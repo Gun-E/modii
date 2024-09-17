@@ -4,7 +4,7 @@ import React from "react";
 export default function StatusBar() {
     return (
         <Image
-            src="/images/Status bar White.png"
+            src="/images/status_bar_white.png"
             alt="Status bar"
             className="absolute w-auto"
             width={393}
