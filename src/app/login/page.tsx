@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useAuth } from "@/app/context/AuthContext";
 import Image from "next/image";
+import StatusBar from "@/components/StatusBar";
 
 export default function Home() {
     const [email, setEmail] = useState('');
@@ -39,6 +40,7 @@ export default function Home() {
 
     return (
         <div className="modii modii-white ">
+            <StatusBar/>
             <div className="flex justify-center">
                 <Image
                     src="/images/login_logo.png"
