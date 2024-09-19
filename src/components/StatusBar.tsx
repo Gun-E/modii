@@ -11,7 +11,7 @@ export default function StatusBar() {
             height={54.1}
             style={{objectFit: 'cover',
                     position: 'absolute',
-                    zIndex:1000}}
+                    zIndex:998}}
             priority
         />
     );

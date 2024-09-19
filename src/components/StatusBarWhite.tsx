@@ -12,7 +12,7 @@ export default function StatusBar() {
             style={{
                 objectFit: 'cover',
                 position: 'absolute',
-                zIndex: 1000
+                zIndex: 998
             }}
             priority
         />
