@@ -345,14 +345,14 @@ body {
 .chat-time {
   position: absolute;
   bottom: 0;
-  inset-inline-end: 94px;
+  inset-inline-start: 103px;
   font-size: 11px;
   color: #d9d9d9;
 }
 .chat-user-time {
   position: absolute;
   bottom: 0;
-  inset-inline-start: 168px;
+  inset-inline-end: 6px;
   font-size: 11px;
   color: #d9d9d9;
 }
