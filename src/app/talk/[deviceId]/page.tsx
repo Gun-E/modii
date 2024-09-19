@@ -28,6 +28,7 @@ export default function Home() {
     const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
     const [message, setMessage] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isSending, setIsSending] = useState<boolean>(false); // 추가된 상태
     const userId = 1;
 
     const chatBodyRef = useRef<HTMLDivElement | null>(null);
@@ -61,7 +62,9 @@ export default function Home() {
     }, [isLoading, chatMessages]);
 
     const sendMessage = async () => {
-        if (!message.trim() || !deviceId) return;
+        if (!message.trim() || !deviceId || isSending) return; // 전송 중일 때는 아무 작업도 하지 않음
+
+        setIsSending(true); // 전송 시작
 
         try {
             const response = await fetch(`https://aqueous-coast-82122-c626a44767e1.herokuapp.com/chat/${userId}/${deviceId}`, {
@@ -93,6 +96,8 @@ export default function Home() {
             await fetchChatMessages();
         } catch (error) {
             console.error("Error sending message:", error);
+        } finally {
+            setIsSending(false); // 전송 완료
         }
     };
 
@@ -159,7 +164,11 @@ export default function Home() {
                         onChange={(e) => setMessage(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
-                    <button className="input-send-button" onClick={sendMessage}>
+                    <button
+                        className="input-send-button"
+                        onClick={sendMessage}
+                        disabled={isSending} // 버튼 비활성화
+                    >
                         <Image
                             src={`/images/icon_24px_send.png`}
                             alt="send"
