@@ -49,18 +49,8 @@ export default function ChatList() {
 
     return (
         <div className="chat-list">
-            <Link href={`/`} className="chat-body">
-                <div className="chat-content">
                     <GroupChat/>
-                    <div className="chat-text">
-                        <h2 className="modii-name">울집 애기들</h2>
-                        <div className="message-time">
-                            <span className="message">어제 왜 작은방 청소 안했는데 잤어?</span>
-                            <span className="time">{formatDate("2024-09-19 09:00:00.000000")}</span>
-                        </div>
-                    </div>
-                </div>
-            </Link>
+
             {chatList.map((data) => (
                 <Link href={`/talk/${data.deviceId}`} key={data.deviceId} className="chat-body">
                     <div className="chat-content">
