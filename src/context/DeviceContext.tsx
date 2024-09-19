@@ -65,13 +65,19 @@ export const DeviceProvider: React.FC<{ children: React.ReactNode }> = ({ childr
                 body: JSON.stringify({ status: newStatus }),
             });
 
-            setDevices((prevDevices) =>
-                prevDevices.map((device) =>
+            setDevices((prevDevices) => {
+                const updatedDevices = prevDevices.map((device) =>
                     device.deviceId === deviceId
                         ? { ...device, status: newStatus }
                         : device
-                )
-            );
+                );
+
+                // 상태 변경 후 캐시 업데이트
+                localStorage.setItem(CACHE_KEY, JSON.stringify(updatedDevices));
+                localStorage.setItem(`${CACHE_KEY}_timestamp`, new Date().getTime().toString());
+
+                return updatedDevices;
+            });
         } catch (error) {
             console.error('Error updating device status:', error);
         } finally {
