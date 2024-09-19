@@ -109,7 +109,7 @@ export default function Home() {
                         height={24}
                     />
                 </Link>
-                <h1>{chatMessages.length > 0 ? chatMessages[0].name : 'Chat'}</h1>
+                <h1>{chatMessages.length > 0 ? chatMessages[0].name : 'MODII'}</h1>
             </div>
 
             <div className="modii-chat-detail-body" ref={chatBodyRef}>
