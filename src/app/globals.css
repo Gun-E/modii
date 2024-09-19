@@ -307,7 +307,7 @@ body {
   flex-direction: column;
   margin-top: 10px;
   padding: 9px 14px;
-  width: 195px;
+  max-width: 195px;
   background-color: #d5d6f2;
   border-radius: 0 20px 20px 20px;
 }
@@ -315,7 +315,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 9px 14px;
-  width: 195px;
+  max-width: 195px;
   background-color: #ffffff;
   border-radius: 20px 0 20px 20px;
 }
