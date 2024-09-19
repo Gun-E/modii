@@ -23,11 +23,28 @@ export default function ChatList() {
 
     return (
         <div className="chat-list">
+            <Link href={``} className="chat-body">
+                <div className="chat-content">
+                    <div className="circle-chat">
+
+                    </div>
+                    <div className="circle-chat">
+
+                    </div>
+                    <div className="chat-text">
+                        <h2 className="modii-name">울집 애기들</h2>
+                        <div className="message-time">
+                            <span className="message">어제 왜 작은방 청소 안했는데 잤어?</span>
+                            <span className="time">{formatDate("20240919")}</span>
+                        </div>
+                    </div>
+                </div>
+            </Link>
             {chatList.map((data) => (
                 <Link href={`/talk/${data.deviceId}`} key={data.deviceId} className="chat-body">
                     <div className="chat-content">
                         <div className="circle-chat" style={{backgroundColor: data.image}}>
-                            <Image
+                        <Image
                                 src={`/images/${data.deviceType}.png`}
                                 alt={data.name}
                                 style={{
@@ -43,7 +60,7 @@ export default function ChatList() {
                             <h2 className="modii-name">{data.name}</h2>
                             <div className="message-time">
                                 <span className="message">{data.chattedList}</span>
-                                <span className="time">{formatDate(data.chattedTime)}</span> {/* 포맷팅된 시간 */}
+                                <span className="time">{formatDate(data.chattedTime)}</span>
                             </div>
                         </div>
                     </div>
