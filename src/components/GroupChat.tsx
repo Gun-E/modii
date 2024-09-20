@@ -105,7 +105,7 @@ const GroupChat = () => {
                         <div className="chat-text">
                             <h2 className="modii-name">
                                 {groupChat.groupName}
-                                <span className="device-count">{groupChat.deviceCount}</span>
+                                <span className="device-count">{groupChat.deviceCount+1}</span>
                             </h2>
 
                             <div className="message-time">
